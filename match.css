@@ -1,0 +1,255 @@
+*{
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+    font-family: 'Times New Roman', Times, serif;
+}
+body{
+    background-image: url('images/fondo1.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+.img{
+    width: 175px;
+    height: 400px;
+    border: 1px solid black;
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 75px;
+    transition: opacity 1s ease;
+}
+#enem{
+    right: 100px;
+}
+#personaje{
+    left: 100px;
+}
+#att{
+    width: 100%;
+    height: 20%;
+    position: fixed;
+    bottom: 0px;
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 1px solid black;
+    display: flex;
+    gap: 10px;
+}
+#att>div>button{
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 1px solid black;
+    border-radius: 25px;
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 5px;
+    left: 20px;
+    width: 250px;
+    height: 75px;
+    font-size: 50px;
+}
+#att>div>p{
+    position: relative;
+    height: 20px;
+    width: 250px;
+    font-size: 20px;
+    bottom: 20px;
+    left: 50px;
+}
+#dir, #pos {
+    position: relative;
+    width: 200px;
+    height: 50px;
+    left: 25px;
+    z-index: 101;
+    font-size: 20px;
+}
+#att>div>button:hover, #dir:hover{
+    background-color: rgba(200, 200, 200, 0.5);
+    cursor: pointer;
+}
+#salir{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 75px;
+    height: 75px;
+    background-color: rgba(255,0,0,0.7);
+    color: white;
+    border: 2px solid black;
+    font-size: 25px;
+    border-radius: 50%;
+    z-index: 100; 
+}
+#salir:hover{
+    background-color: rgb(150, 0, 0, 0.5);
+}
+#cancelExit, #confirmExit{
+    height: 15%;
+    width: 30%;
+    border: 2px solid black;
+    color: white;
+    font-size: 30px;
+    border: 1px solid black;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+#cancelExit:hover{
+    background-color: rgb(75, 126, 0);
+}
+#confirmExit:hover{
+    background-color: rgb(133, 0, 0);
+}
+.ok{
+    height: 60px;
+    width: 300px;
+    font-size: 30px;
+    border: 1px solid black;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: black;
+}
+.ok:hover{
+    background-color: rgb(200, 200, 200);
+}
+#opacar{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 102;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+#perder, #ganar, #exit{
+    top:100px;
+    right: 25%;
+    position: fixed;
+    width: 700px;
+    height: 400px;
+    border: 1px solid black;
+    display: none; 
+    z-index: 103; 
+    text-align: center;
+    background-image: url('images/fondo7.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+#stad{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(100, 100, 100, 0.7);
+    text-align: center;
+    z-index: 99;
+}
+#per{
+    position: fixed;
+    left: 0px;
+    background-color: rgba(0, 0, 255, 0.5);
+    z-index: 100; 
+    width: 500px;
+    height: 50px;
+
+}
+#ene{
+    position: fixed;
+    right: 0px;
+    background-color: rgba(255, 0, 0, 0.5);
+    z-index: 100; 
+    width: 500px;
+    height: 50px;
+}
+/* Contenedores de las barras de vida (fondo negro) */
+/* Contenedor de la barra */
+#per_v, #ene_v {
+    width: 450px;
+    height: 25px;
+    position: relative; /* Necesario para posicionar los hijos */
+    background-color: black; /* Fondo de la barra */
+    color: white; /* Color del texto (si aplica) */
+    /* Espacio entre barras */
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+/* Barra de vida (cantidad restante) */
+#per_cant, #ene_cant {
+    position: absolute; /* Dentro del contenedor padre */
+    top: 0;
+    left: 0;
+    width: 450px; /* Inicialmente llena */
+    height: 25px;
+    background-color: greenyellow;
+    transition: width 0.3s ease; /* Animación suave al cambiar ancho */
+    z-index: 1; /* Debajo del texto */
+}
+
+/* Texto de la barra */
+#per_vi, #ene_vi {
+    position: absolute; /* Encima de la barra */
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste preciso para centrar */
+    font-size: 14px;
+    z-index: 2; /* Encima de la barra de vida */
+    color: white; /* Color del texto */
+    pointer-events: none; /* Evita interferencias al hacer clic */
+}
+
+
+
+#dmg_per, #dmg_ene, #esq_per, #esq_ene{
+    width: 200px;
+    height: 75px;
+    font-size: 50px;
+    color: red;
+    position: absolute;
+    top: 100px;
+    z-index: 101;
+    text-align: center;
+}
+#dmg_per, #esq_per{
+    left: 250px;
+
+}
+#dmg_ene, #esq_ene{
+    right: 250px;
+}
+#esq_per, #esq_ene{
+    position: fixed;
+    top: 200px;
+}
+.contenedor {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor */
+}
+
+.equipamiento {
+    border: 1px solid black;
+    width: 75px;
+    height: 75px;
+    position: relative;
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 50px;
+}
+#skip{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 102;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+#skip:hover{
+    background-color: rgba(255, 255, 255, 0.5);
+}
