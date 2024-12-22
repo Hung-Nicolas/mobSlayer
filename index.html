@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>mobSlayer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/icon.png" type="image/png">
+</head>
+<body>
+    <audio loop id="lobby_theme">
+        <source src="SFX/shiawase-monstercat-release.mp3">
+    </audio>
+    <div id="arriba">
+            <div id="coins">
+                <div id="coinsimg"></div>
+                <p>Coins:</p>
+            </div>
+            <div id="gems">
+                <div id="gemsimg"></div>
+                <p>Gems:</p>
+            </div>
+        <button onclick="toggle_c('tienda')" id="tienda">Tienda</button>
+    </div>
+    <div class="cont_menu">
+        <h1>mobSlayer</h1>
+        <p>v1.3</p>
+        <br>
+        <button onclick="toggle_c('batalla')" class="b1">Batalla</button>
+        <br>
+        <button onclick="toggle_c('estadisticas')" class="b1">Estadísticas</button>
+        <br>
+        <button onclick="toggle_c('opciones')" class="b1">Opciones</button>
+    </div>
+    <div id="cont_batalla"><!-- Batalla -->
+        <button onclick="toggle_c('batalla')" class="volver b1">Volver</button><!-- btn_batalla -->
+        <button onclick="toggle_c('niveles')"  id="btn_niveles" class="b1">Niveles</button>
+        <button onclick="toggle_c('equipamiento')" id="btn_equipamiento" class="b1">Equipamiento</button><!-- btn_eq -->
+        <select name="difficulty" id="diff" class="b1" onchange="changeDiff(this.value)">
+            <option value="facil" selected disabled>Dificultad</option>
+            <option value="facil">Fácil</option>
+            <option value="normal">Normal</option>
+            <option value="dificil">Difícil</option>
+            <option value="extremo">Extremo</option>
+        </select>
+        <button id="btn_pelear" class="b1" onclick="playGame()">Pelear</button>
+    </div>
+    <div id="cont_niveles">
+        <button onclick="toggle_c('niveles')" class="volver b1">Volver</button>
+        <div id="c_secciones">
+            <div id="seccion1_div" class="secciones">Sección 1
+                <!-- <div id="nivel1" class="nivel">
+                    <h1 class="mobTitle">Nivel 1</h1>
+                    <div class="mob"></div>
+                    <div class="mobItemsC">
+                        <div class="mobItems mobEspada"></div>
+                        <div class="mobItems mobCasco"></div>
+                        <div class="mobItems mobPechera"></div>
+                        <div class="mobItems mobPantalon"></div>
+                        <div class="mobItems mobBotas"></div>
+                    </div>
+                    <button class="play" id="play_nivel1" onclick="playLevel(seccion1.nivel1)">Play</button>
+                </div> -->
+                
+            </div>
+            <div id="seccion2_div" class="secciones">Sección 2</div>
+            <div id="seccion3_div" class="secciones">Sección 3</div>
+            <div id="seccion4_div" class="secciones">Sección 4</div>
+            <div id="seccion5_div" class="secciones">Sección Final</div>
+        </div>
+        
+    </div>
+    <div id="cont_opciones">
+        <button onclick="toggle_c('opciones')" class="volver b1">Volver</button>
+        <div id="musica">
+            <p>Musica?</p>
+            <button onclick="despausar()">Si</button>
+            <button onclick="pausar()">No</button>
+        </div>
+        <p id="cred">Juego hecho por LH3208</p>
+        <p id="ver">Versión: 1.3 "Niveles"</p>
+        <div id="newList">
+            <h1 class="listaAct">Actualización 1.3 cambios:</h1>
+            <ul class="listaAct">
+                <li>Se han agregado niveles</li>
+                <li>Boses</li>
+                <li>Nerf escudo</li>
+                <li>Se arreglaron bugs</li>
+            </ul>
+        </div>
+        <div id="codes">
+            <form onsubmit="checkCode(event)">
+                <h2>Ingresa tu código:</h2>
+                <input type="text" id="codeInput" name="code" required placeholder="Código">
+                <button type="submit" id="codeButton">Canjear</button>
+                <p id="canjeo">xd</p>
+            </form>
+        </div>
+        
+    </div>
+    <div id="cont_estadisticas">
+        <button onclick="toggle_c('estadisticas')" class="volver b1">Volver</button>
+        <div id="stat">
+            <h1>Estadisticas</h1>
+            <ul>
+                <li id="PG">xd</li>
+                <li id="PP">xd</li>
+                <li id="PT">xd</li>
+                <li id="DI">xd</li>
+                <li id="DR">xd</li>
+            </ul>
+        </div>
+    </div>
+    <div id="cont_tienda">
+        <button onclick="toggle_c('tienda')" class="volver b1">Volver</button>
+        <div id="items_a_comprar"></div>
+    </div>
+    
+    <div id="cont_equipamiento"><!-- Equipamiento -->
+        <button onclick="toggle_c('equipamiento')" class="volver b1">Volver</button>
+        <div id="stats">
+            <h3>Estadistica del personaje:</h3>
+            <p id="vida_p">Vida:xd</p>
+            <p id="daño_p">Daño:xd</p>
+        </div>
+        
+        <div class="pers">
+            <div id="imagen"></div>
+            <button id="casco" class="armadura" value="casco" onclick="select(value)"></button>
+            <button id="pechera" class="armadura" value="pechera" onclick="select(value)"></button>
+            <button id="pantalon" class="armadura" value="pantalon" onclick="select(value)"></button>
+            <button id="botas" class="armadura" value="botas" onclick="select(value)"></button>
+            <button id="espada" class="armadura" value="espada" onclick="select(value)"></button>
+        </div>
+    </div>
+    <div id="opacar"></div>
+    <div class="seleccionar" id="s_casco">
+        <button class="opc" id="casco_nada" onclick="equip('casco_nada')"></button>
+        <button class="opc" id="casco_cuero" onclick="equip('casco_cuero')"></button>
+        <button class="opc" id="casco_malla" onclick="equip('casco_malla')"></button>
+        <button class="opc" id="casco_oro" onclick="equip('casco_oro')"></button>
+        <button class="opc" id="casco_hierro" onclick="equip('casco_hierro')"></button>
+        <button class="opc" id="casco_diamante" onclick="equip('casco_diamante')"></button>
+        <button class="opc" id="casco_netherite" onclick="equip('casco_netherite')"></button>
+    </div>
+    <div class="seleccionar" id="s_pechera">
+        <button class="opc" id="pechera_nada" onclick="equip('pechera_nada')"></button>
+        <button class="opc" id="pechera_cuero" onclick="equip('pechera_cuero')"></button>
+        <button class="opc" id="pechera_malla" onclick="equip('pechera_malla')"></button>
+        <button class="opc" id="pechera_oro" onclick="equip('pechera_oro')"></button>
+        <button class="opc" id="pechera_hierro" onclick="equip('pechera_hierro')"></button>
+        <button class="opc" id="pechera_diamante" onclick="equip('pechera_diamante')"></button>
+        <button class="opc" id="pechera_netherite" onclick="equip('pechera_netherite')"></button>
+    </div>
+    <div class="seleccionar" id="s_pantalon">
+        <button class="opc" id="pantalon_nada" onclick="equip('pantalon_nada')"></button>
+        <button class="opc" id="pantalon_cuero" onclick="equip('pantalon_cuero')"></button>
+        <button class="opc" id="pantalon_malla" onclick="equip('pantalon_malla')"></button>
+        <button class="opc" id="pantalon_oro" onclick="equip('pantalon_oro')"></button>
+        <button class="opc" id="pantalon_hierro" onclick="equip('pantalon_hierro')"></button>
+        <button class="opc" id="pantalon_diamante" onclick="equip('pantalon_diamante')"></button>
+        <button class="opc" id="pantalon_netherite" onclick="equip('pantalon_netherite')"></button>
+    </div>
+    <div class="seleccionar" id="s_botas">
+        <button class="opc" id="botas_nada" onclick="equip('botas_nada')"></button>
+        <button class="opc" id="botas_cuero" onclick="equip('botas_cuero')"></button>
+        <button class="opc" id="botas_malla" onclick="equip('botas_malla')"></button>
+        <button class="opc" id="botas_oro" onclick="equip('botas_oro')"></button>
+        <button class="opc" id="botas_hierro" onclick="equip('botas_hierro')"></button>
+        <button class="opc" id="botas_diamante" onclick="equip('botas_diamante')"></button>
+        <button class="opc" id="botas_netherite" onclick="equip('botas_netherite')"></button>
+    </div>
+    <div class="seleccionar" id="s_espada">
+        <button class="opc" id="espada_nada" onclick="equip('espada_nada')"></button>
+        <button class="opc" id="espada_madera" onclick="equip('espada_madera')"></button>
+        <button class="opc" id="espada_piedra" onclick="equip('espada_piedra')"></button>
+        <button class="opc" id="espada_oro" onclick="equip('espada_oro')"></button>
+        <button class="opc" id="espada_hierro" onclick="equip('espada_hierro')"></button>
+        <button class="opc" id="espada_diamante" onclick="equip('espada_diamante')"></button>
+        <button class="opc" id="espada_netherite" onclick="equip('espada_netherite')"></button>
+        <button class="opc" id="espada_arco" onclick="equip('espada_arco')"></button>
+    </div>
+    <div id="opacar107"></div>
+    <div id="showUnlock">
+        <h1 id="text_showUnlock">Has desbloqueado:</h1>
+        <div id="items_unlock"></div>
+        <button id="t_showUnlock" onclick="toggle_showUnlock()">X</button>
+    </div>
+    <div class="info" id="i_ch">
+        <button class="close_info" onclick="t_info('ch')">X</button>
+        <div class="conts">
+            <div class="items i_espada_madera">10%</div>
+            <div class="items i_casco_cuero">10%</div>
+            <div class="items i_pechera_cuero">10%</div>
+            <div class="items i_pantalon_cuero">10%</div>
+            <div class="items i_botas_cuero">10%</div>
+            <div class="items i_espada_piedra">7%</div>
+            <div class="items i_casco_malla">7%</div>
+            <div class="items i_pechera_malla">7%</div>
+            <div class="items i_pantalon_malla">7%</div>
+            <div class="items i_botas_malla">7%</div> 
+            <div class="items i_espada_oro">3%</div>
+            <div class="items i_casco_oro">3%</div>
+            <div class="items i_pechera_oro">3%</div>
+            <div class="items i_pantalon_oro">3%</div>
+            <div class="items i_botas_oro">3%</div>
+        </div>
+        <br><br>
+        <div class="texto_c">
+            <span>Cuero/madera:50%</span>
+            <br>
+            <span>Malla/piedra:35%</span>
+            <br>
+            <span>Oro:15%</span>
+            <br>
+            <span></span>
+            <br>
+            <span></span>
+            <br>
+            <span></span>
+        </div>
+        <br>
+        <div class="button_c">
+            <label for="comprar">$100</label>
+            <br>
+            <button name="comprar" onclick="buyChest('ch')">Comprar</button>
+            <br>
+            <p id="ch_p"></p>
+            <br>
+            <label for="abrir" id="cant_ch">Tienes: %d</label>
+            <br>
+            <button name="abrir" onclick="openChest('ch')">Abrir</button>
+        </div>
+    </div>
+    <div class="info" id="i_dch">
+        <button class="close_info" onclick="t_info('dch')">X</button>
+        <div class="conts">
+            <div class="items i_espada_madera">10%</div>
+            <div class="items i_casco_cuero">10%</div>
+            <div class="items i_pechera_cuero">10%</div>
+            <div class="items i_pantalon_cuero">10%</div>
+            <div class="items i_botas_cuero">10%</div>
+            <div class="items i_espada_piedra">12%</div>
+            <div class="items i_casco_malla">12%</div>
+            <div class="items i_pechera_malla">12%</div>
+            <div class="items i_pantalon_malla">12%</div>
+            <div class="items i_botas_malla">12%</div> 
+            <div class="items i_espada_oro">10%</div>
+            <div class="items i_casco_oro">10%</div>
+            <div class="items i_pechera_oro">10%</div>
+            <div class="items i_pantalon_oro">10%</div>
+            <div class="items i_botas_oro">10%</div>
+            <div class="items i_espada_hierro">7.96%</div>
+            <div class="items i_casco_hierro">7.96%</div>
+            <div class="items i_pechera_hierro">7.96%</div>
+            <div class="items i_pantalon_hierro">7.96%</div>
+            <div class="items i_botas_hierro">7.86%</div>
+            <div class="items i_espada_diamante">0.04%</div>
+            <div class="items i_casco_diamante">0.04%</div>
+            <div class="items i_pechera_diamante">0.04%</div>
+            <div class="items i_pantalon_diamante">0.04%</div>
+            <div class="items i_botas_diamante">0.04%</div>
+        </div>
+        <br><br>
+        <div class="texto_c">
+            <span>Cuero/madera:50%</span>
+            <br>
+            <span>Malla/piedra:60%</span>
+            <br>
+            <span>Oro:50%</span>
+            <br>
+            <span>Hierro:39.8%</span>
+            <br>
+            <span>Diamante:0.2%</span>
+            <br>
+            <span>Items:2</span>
+        </div>
+        <br>
+        <div class="button_c">
+            <label for="comprar">$500</label>
+            <br>
+            <button name="comprar" onclick="buyChest('dch')">Comprar</button>
+            <br>
+            <p id="dch_p"></p>
+            <br>
+            <label for="abrir" id="cant_dch">Tienes: %d</label>
+            <br>
+            <button name="abrir" onclick="openChest('dch')">Abrir</button>
+        </div>
+    </div>
+    <div class="info" id="i_ech">
+        <button class="close_info" onclick="t_info('ech')">X</button>
+        <div class="conts">
+            <div class="items i_espada_piedra">10%</div>
+            <div class="items i_casco_malla">10%</div>
+            <div class="items i_pechera_malla">10%</div>
+            <div class="items i_pantalon_malla">10%</div>
+            <div class="items i_botas_malla">10%</div>
+            <div class="items i_espada_oro">12%</div>
+            <div class="items i_casco_oro">12%</div>
+            <div class="items i_pechera_oro">12%</div>
+            <div class="items i_pantalon_oro">12%</div>
+            <div class="items i_botas_oro">12%</div> 
+            <div class="items i_espada_hierro">10%</div>
+            <div class="items i_casco_hierro">10%</div>
+            <div class="items i_pechera_hierro">10%</div>
+            <div class="items i_pantalon_hierro">10%</div>
+            <div class="items i_botas_hierro">10%</div>
+            <div class="items i_espada_diamante">7.96%</div>
+            <div class="items i_casco_diamante">7.96%</div>
+            <div class="items i_pechera_diamante">7.96%</div>
+            <div class="items i_pantalon_diamante">7.96%</div>
+            <div class="items i_botas_diamante">7.86%</div>
+            <div class="items i_espada_netherite">0.04%</div>
+            <div class="items i_casco_netherite">0.04%</div>
+            <div class="items i_pechera_netherite">0.04%</div>
+            <div class="items i_pantalon_netherite">0.04%</div>
+            <div class="items i_botas_netherite">0.04%</div>
+        </div>
+        <br><br>
+        <div class="texto_c">
+            <span>Malla/piedra:50%</span>
+            <br>
+            <span>Oro:60%</span>
+            <br>
+            <span>Hierro:50%</span>
+            <br>
+            <span>Diamante:39.8%</span>
+            <br>
+            <span>Netherite:0.2%</span>
+            <br>
+            <span>Items:2</span>
+        </div>
+        <br>
+        <div class="button_c">
+            <label for="comprar">$1500</label>
+            <br>
+            <button name="comprar" onclick="buyChest('ech')">Comprar</button>
+            <br>
+            <p id="ech_p"></p>
+            <br>
+            <label for="abrir" id="cant_ech">Tienes: %d</label>
+            <br>
+            <button name="abrir" onclick="openChest('ech')">Abrir</button>
+        </div>
+    </div>
+    <div class="info" id="i_v">
+        <button class="close_info" onclick="t_info('v')">X</button>
+        <div class="conts">
+            <div class="items i_espada_oro">23%</div>
+            <div class="items i_casco_oro">23%</div>
+            <div class="items i_pechera_oro">23%</div>
+            <div class="items i_pantalon_oro">23%</div>
+            <div class="items i_botas_oro">23%</div> 
+            <div class="items i_espada_hierro">21%</div>
+            <div class="items i_casco_hierro">21%</div>
+            <div class="items i_pechera_hierro">21%</div>
+            <div class="items i_pantalon_hierro">21%</div>
+            <div class="items i_botas_hierro">21%</div>
+            <div class="items i_espada_diamante">15%</div>
+            <div class="items i_casco_diamante">15%</div>
+            <div class="items i_pechera_diamante">15%</div>
+            <div class="items i_pantalon_diamante">15%</div>
+            <div class="items i_botas_diamante">15%</div>
+            <div class="items i_espada_netherite">1%</div>
+            <div class="items i_casco_netherite">1%</div>
+            <div class="items i_pechera_netherite">1%</div>
+            <div class="items i_pantalon_netherite">1%</div>
+            <div class="items i_botas_netherite">1%</div>
+        </div>
+        <br><br>
+        <div class="texto_c">
+            <span>Oro:115%</span>
+            <br>
+            <span>Hierro:105%</span>
+            <br>
+            <span>Diamante:75%</span>
+            <br>
+            <span>Netherite:5%</span>
+            <br>
+            <span>Items:3</span>
+            <br>
+            <span></span>
+        </div>
+        <br>
+        <div class="button_c">
+            <label for="comprar">$2500</label>
+            <br>
+            <button name="comprar" onclick="buyChest('v')">Comprar</button>
+            <br>
+            <p id="v_p"></p>
+            <br>
+            <label for="abrir" id="cant_v">Tienes: %d</label>
+            <br>
+            <button name="abrir" onclick="openChest('v')">Abrir</button>
+        </div>
+    </div>
+    <div class="info" id="i_ov">
+        <button class="close_info" onclick="t_info('ov')">X</button>
+        <div class="conts">
+            <div class="items i_espada_hierro">30%</div>
+            <div class="items i_casco_hierro">30%</div>
+            <div class="items i_pechera_hierro">30%</div>
+            <div class="items i_pantalon_hierro">30%</div>
+            <div class="items i_botas_hierro">30%</div>
+            <div class="items i_espada_diamante">20%</div>
+            <div class="items i_casco_diamante">20%</div>
+            <div class="items i_pechera_diamante">20%</div>
+            <div class="items i_pantalon_diamante">20%</div>
+            <div class="items i_botas_diamante">20%</div>
+            <div class="items i_espada_netherite">10%</div>
+            <div class="items i_casco_netherite">10%</div>
+            <div class="items i_pechera_netherite">10%</div>
+            <div class="items i_pantalon_netherite">10%</div>
+            <div class="items i_botas_netherite">10%</div>
+        </div>
+        <br><br>
+        <div class="texto_c">
+            <span>Hierro:150%</span>
+            <br>
+            <span>Diamante:135%</span>
+            <br>
+            <span>Netherite:15%</span>
+            <br>
+            <span>Items:3</span>
+            <br>
+            <span></span>
+            <br>
+            <span></span>
+        </div>
+        <br>
+        <div class="button_c">
+            <label for="comprar">$4000</label>
+            <br>
+            <button name="comprar" onclick="buyChest('ov')">Comprar</button>
+            <br>
+            <p id="ov_p"></p>
+            <br>
+            <label for="abrir" id="cant_ov" >Tienes: %d</label>
+            <br>
+            <button name="abrir" onclick="openChest('ov')">Abrir</button>
+        </div>
+    </div>
+ <div class="info" id="i_s">
+    <button class="close_info" onclick="t_info('s')">X</button>
+    <div class="conts">
+        <div class="items i_espada_madera">10%</div>
+        <div class="items i_espada_piedra">20%</div>
+        <div class="items i_espada_arco">20%</div>
+        <div class="items i_espada_oro">25%</div>
+        <div class="items i_espada_hierro">15%</div>
+        <div class="items i_espada_diamante">7.5%</div>
+        <div class="items i_espada_netherite">2.5%</div>
+    </div>
+    <br><br>
+    <div class="texto_c">
+        <span></span>
+        <br>
+        <span></span>
+        <br>
+        <span></span>
+        <br>
+        <span></span>
+        <br>
+        <span></span>
+        <br>
+        <span>Items:1</span>
+    </div>
+    <br>
+    <div class="button_c">
+        <label for="comprar">$1000</label>
+        <br>
+        <button name="comprar" onclick="buyChest('s')">Comprar</button>
+        <br>
+        <p id="s_p"></p>
+        <br>
+        <label for="abrir" id="cant_s" >Tienes: %d</label>
+        <br>
+        <button name="abrir" onclick="openChest('s')">Abrir</button>
+    </div>
+    <script src="menu_js/main.js"></script>             <!--   3 -->
+    <script src="menu_js/first.js"></script>
+    <script src="menu&match_js/secciones.js"></script>
+    <script src="menu&match_js/object.js"></script>
+    <script src="menu_js/codes.js"></script>
+    <script src="menu_js/cargar.js"></script>           <!--  73 -->
+    <script src="menu_js/contenedores.js"></script>     <!--  17 -->
+    <script src="menu_js/stats.js"></script>            <!--  61 -->
+    <script src="menu_js/audios.js"></script>           <!--  42 -->
+    <script src="menu_js/equipaje.js"></script>         <!-- 135 -->
+    <script src="menu_js/chest.js"></script>            <!-- 233 -->
+    <script src="menu_js/difficulty.js"></script>
+</body>
+</html>

@@ -1,0 +1,685 @@
+*{
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+    font-family: 'Times New Roman', Times, serif;
+}
+body{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background-image: url('images/fondo2.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+.cont_menu {
+    border: 1px solid black;
+    background-color: rgba(128, 128, 128, 0.5);  /* Rojo con 70% de opacidad */
+    padding: 20px;
+    position: absolute;
+    top: 75px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+ul{
+    font-size: 40px;
+}
+h1{
+    cursor: default;
+    font-size: 75px;
+}
+p{
+    cursor: default;
+    font-size: 25px;
+}
+.b1{
+    height: 60px;
+    width: 300px;
+    font-size: 50px;
+    border: 1px solid black;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+button:hover{
+    background-color: rgba(200, 200, 200, 0.5);
+    cursor: pointer;
+}
+#arriba{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 100px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 40%;
+    height: 50px;
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 1px solid black;
+    z-index: 101;
+    border-bottom-left-radius: 50px;
+    padding-left: 5%;
+}
+#arriba button{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+}
+#arriba button:hover{
+    background-color: rgb(235, 255, 162);
+}
+#coins, #gems {
+    position: relative;
+    display: flex; /* Alinea los elementos en una fila */
+    align-items: center; /* Centra verticalmente */
+    gap: 5px; /* Espacio entre el ícono y el texto */
+}
+
+#coinsimg, #gemsimg, #tienda {
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    display: inline-block;
+}
+
+#coinsimg {
+    background-image: url(images/coin.png);
+}
+
+#gemsimg {
+    background-image: url(images/gem.png);
+}
+#tienda{
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 1px solid black;
+    background-image: url(images/tienda.png);
+}
+#cont_estadisticas{
+    background-image: url('images/fondo4.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+#cont_equipamiento{
+    background-image: url('images/fondo3.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+#cont_batalla{
+    background-image: url('images/fondo5.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+#cont_opciones{
+    background-image: url('images/fondo6.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+#cont_tienda{
+    background-image: url('images/fondo8.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+#cont_niveles{
+    background-image: url('images/fondo10.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+#cont_batalla, #cont_equipamiento, #cont_estadisticas, #cont_tienda, #cont_opciones, #cont_niveles {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none; 
+    z-index: 101; 
+}
+#cred{
+    position: fixed;
+    top: 15%;
+    left: 7%;
+}
+#ver{
+    position: fixed;
+    top: 20%;
+    left: 7%;
+}
+#musica{
+    width: 30%;
+    height: 30%;
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    border: 1px solid black;
+}
+#musica button{
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+}
+#musica button:hover{
+    background-color: rgba(200, 200, 200, 0.5);
+}
+#cont_tienda{
+    z-index: 100;
+}
+
+#c_secciones {
+    border: 1px solid black;
+    width: 90%;               /* Ancho del contenedor */
+    height: 80%;              /* Altura del contenedor */
+    position: absolute;
+    top: 14%;
+    left: 5%;
+    overflow-x:auto;         /* Scroll horizontal habilitado si las columnas exceden */
+    overflow-y: auto;
+    gap: 10px;                /* Espacio entre las columnas */
+    padding: 10px;            /* Espaciado interior del contenedor */
+}
+
+/* Contenedor de los niveles */
+/* Contenedor de los niveles */
+.secciones {
+    display: flex;               /* Alinea los niveles en fila */            /* No permite que los elementos se envuelvan */
+    justify-content: flex-start;  /* Alinea los elementos al inicio */                    /* Espacio de 20px entre los niveles */
+    margin: 20px;
+    width: 270%;                  /* Asegura que el contenedor ocupe todo el ancho disponible */
+    border: 1px solid black;
+    height: 500px;
+    font-size: 25px;
+    display: none;
+}
+/* Estilo de cada nivel */
+.nivel {
+    border: 1px solid black;
+    width: 300px;                 /* Ancho fijo de cada nivel */
+    height: 80%;                  /* Altura del 90% del contenedor padre */
+    position: relative;
+    top: 10%;
+}
+
+
+
+
+
+
+.mob {
+    position: relative;
+    width: 125px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    float: left; /* Permite que se coloque a la izquierda */
+}
+.mobTitle{
+    font-size: 25px;
+    position: relative;
+    top: 0px;
+}
+.mobItemsC {
+    float: left;         /* Coloca a la derecha de .mob */
+    margin-left: 10px;   /* Espacio entre la imagen y los items */
+    width: 150px;        /* Ancho del contenedor de los items */
+    height: 100%;        /* Alto completo del contenedor */
+    display: grid;       /* Activa el sistema de cuadrícula */
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas de igual tamaño */
+    grid-template-rows: repeat(3, 60px);   /* 3 filas de 60px de alto */
+    gap: 10px;           /* Espacio de 10px entre los items */
+}
+
+.mobItems {
+    width: 60px;         /* Ancho de cada item */
+    height: 60px;        /* Alto de cada item */
+    border: 1px solid black; /* Borde de cada item */
+    background-size: cover;
+    background-position: center;
+}
+.play, .claimButton{
+    height: 45px;
+    bottom: 0px;
+    font-size: 30px;
+    position: absolute;
+}
+.claimButton{
+    background-color: rgba(255, 255, 0, 0.7);
+    color: rgba(128, 128, 0);
+}
+.play{
+    width: 125px;
+    left: 0px;
+    background-color: rgba(128, 128, 128, 0.5);;
+}
+.play:hover{
+    background-color: rgba(200, 200, 200, 0.5);
+}
+.claimButton:hover{
+    background-color: rgba(255, 255, 100, 0.5);
+}
+
+.reward{
+    position: absolute;
+    bottom: 50px;
+    right: 0px;
+    width: 100px;
+    font-size: 30px;
+}
+.claimButton{
+    right: 0px;
+    width: 150px;
+    
+}
+
+#stat{
+    color: black;
+    border: 1px solid black;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 35%;
+}
+.volver{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+#btn_equipamiento{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+#btn_niveles{
+    position: absolute;
+    bottom: 100px;
+    right: 20px;
+}
+#btn_pelear{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+#diff{
+    position: absolute;
+    bottom: 20px;
+    right: 350px;
+    text-align: center;
+}
+.pers{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 250px;
+    opacity: 0.8;
+}
+#imagen{
+    background-image: url(images/steve.png);
+    width: 175px;
+    height: 400px;
+    border: 1px solid #ccc;
+    background-size: cover; /*EL AJUSTE PARA IMAGENES (CUBRIR, POSICION, CENTRADO)*/
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#stats{
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    font-size: 30px;
+    color: white;
+}
+.armadura{
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    position: absolute;
+    background-color: #fff;
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.armadura:hover{
+    filter: brightness(0.8); 
+}
+#casco{
+    top: 5px;
+    right:200px;   
+}
+#pechera{
+    bottom: 5px;
+    right: 200px;
+}
+#pantalon{
+    top: 5px;
+    left: 200px;
+}
+#botas{
+    bottom: 5px;
+    left: 200px;
+}
+#espada{
+    top: 5px;
+    right: 400px;
+}
+.seleccionar{
+    position: fixed;
+    top: 100px;
+    width: 500px;
+    height: 225px;
+    border: 1px solid black;
+    background-color: #ddd;
+    display: none;
+    z-index: 105;
+    text-align: center;
+}
+.opc{
+    width: 100px;
+    height: 100px;
+    background-color: #aaa;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+.opc:hover {
+    filter: brightness(0.8); 
+}
+#opacar{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 104;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+#opacar107{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 107;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+.boton-deshabilitado {
+    opacity: 0.5; /* Reducir la opacidad del botón */
+    cursor: not-allowed; /* Cambiar el cursor a no permitido */
+    pointer-events: none; /* Deshabilitar eventos de puntero */
+}
+#items_a_comprar{
+    border: 1px solid black;
+    width: 90%;
+    height: 400px;
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    top: 100px;
+    right: 5%;
+    gap: 25px;
+    overflow-y: auto;
+}
+#items_a_comprar >div{
+    position: relative;
+    border: 1px solid black;
+    width: 200px;
+    height: 350px;
+    top: 10px;
+    left: 10px;
+}
+.buy_img{
+    position: relative;
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+#chest{
+    background-image: url(images/chest.jpeg);
+}
+#double_chest{
+    background-image: url(images/double_chest.jpeg);
+}
+#ender_chest{
+    background-image: url(images/ender_chest.jpeg);
+}
+#vault{
+    background-image: url(images/vault.jpeg);
+}
+#ominous_vault{
+    background-image: url(images/ominous_vault.jpeg);
+}
+#shulker{
+    background-image: url(images/shulker.png);
+}
+.buy_btn{
+    width: 125px;
+    height: 50px;
+    font-size: 25px;
+    color: white;
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 1px solid black;
+}
+.buy_btn:hover{
+    background-color: rgb(200, 200, 200, 0.5);
+}
+.info{
+    z-index: 105;
+    position: fixed;
+    width: 80%;
+    height: 90%;
+    border: 2px solid black;
+    top: 5%;
+    display: none;
+    background-image: url('images/fondo9.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+.close_info{
+    position: absolute;
+    color: white;
+    background-color: red;
+    width: 9%;
+    height: 10%;
+    font-size: 45px;
+    right: 0px;
+    z-index: 106;
+    opacity: 0.8;
+}
+.close_info:hover{
+    background-color: rgb(129, 0, 0, 0.8);
+}
+.items{
+    width: 75px;
+    height: 75px;
+    border: 1px solid black;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+}
+.conts{
+    position: relative;
+    top: 5%;
+    left: 5%;
+    width: 45%;
+    height: 90%;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+.texto_c{
+    position: relative;
+    bottom: 85%;
+    left: 60%;
+    width: 50%;
+    text-align: left;
+}
+.texto_c > span{
+    font-size: 25px;
+    color: black;
+    position: relative;
+    height: 25px;
+}
+.button_c{
+    border: 1px solid black;
+    width: 30%;
+    height: 35%;
+    position: relative;
+    bottom: 85%;
+    left: 60%;
+    font-size: 25px;
+}
+.button_c button{
+    width: 100px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 15px;
+    border: 1px solid black;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: white;
+    
+}
+.button_c button:hover{
+    background-color: rgba(200, 200, 200, 0.5);
+}
+#showUnlock {
+    position: fixed;
+    border: 1px solid black;
+    background-image: url(images/fondo7.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%; /* Asegura que el contenedor esté centrado horizontalmente */
+    display: flex; /* Usamos flexbox para centrar el contenido */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    padding: 10px; /* Un poco de espacio interno */
+    z-index: 108;
+    display: none;
+}
+
+#t_showUnlock {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8%;
+    height: 10%;
+    border: 1px solid black;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+#t_showUnlock:hover {
+    background-color: rgba(200, 0, 0, 0.5);
+}
+
+#text_showUnlock {
+    font-size: 30px;
+}
+
+#items_unlock {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 150px); /* Cada imagen será de 150px */
+    grid-gap: 10px; /* Espacio entre las imágenes */
+    justify-content: center; /* Centra las columnas de las imágenes */
+    align-items: center; /* Centra las imágenes en el eje vertical */
+    padding: 10px;
+}
+
+#items_unlock img {
+    width: 150px; /* Establecemos el tamaño de las imágenes */
+    height: 150px; /* Mantienen las imágenes cuadradas */
+    object-fit: cover; /* La imagen cubrirá todo el área sin deformarse */
+    margin: 0 auto; /* Centra cada imagen dentro de su celda */
+}
+#newList{
+    border: 1px solid black;
+    width: 30%;
+    height: 60%;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
+.listaAct{
+    font-size: 35px;
+}
+#codes{
+    border: 1px solid black;
+    width: 30%;
+    height: 60%;
+    position: fixed;
+    bottom: 10px;
+    left: 35%;
+}
+#codeInput{
+    position: absolute;
+    width: 75%;
+    height: 20%;
+    font-size: 200%;
+    top: 20%;
+    left: 12.5%;
+}
+#codeButton{
+    position: absolute;
+    width: 75%;
+    height: 20%;
+    top: 50%;
+    left: 12.5%;
+    font-size: 50px;
+}
+#canjeo{
+    position: absolute;
+    bottom: 10%;
+    text-align: center;
+    width: 50%;
+    left: 25%;
+}
+#items_unlock {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));  /* Asegura que cada celda tenga al menos 120px */
+    gap: 15px;  /* Añadir espacio entre los elementos */
+    justify-items: center;  /* Centra los ítems en cada celda */
+    align-items: center;  /* Centra verticalmente los ítems */
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;  /* Asegura que el contenedor no sobrepase su celda */
+}
+/* Estilo general para los labels */
+.item-container > span {
+    font-size: 35px; /* Tamaño de fuente por defecto */
+}
+
+/* Si la cantidad es mayor a 1, aumentamos el tamaño de la fuente */
+.item-container span.large-amount {
+    font-size: 35px; /* Aumenta el tamaño para cantidades mayores a 1 */
+}
