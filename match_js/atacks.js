@@ -458,7 +458,7 @@ function esp_explocion(){
         mostrarDefensa('per');
         freeze();
         fun_Ataque(3);
-        explocionpoint-=3;
+        explocionpoint-=5;
         document.getElementById('explocionP').textContent = `${explocionpoint}/5`;
         setTimeout(() => {
             AtqEne();
