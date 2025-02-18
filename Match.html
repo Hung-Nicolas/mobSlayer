@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Match</title>
+    <link rel="stylesheet" href="match.css">
+    <link rel="icon" href="images/icon_match.png" type="image/png">
+</head>
+<body>
+    <button id="salir" onclick="toggleExit()">EXIT</button>
+    <button id="skip" onclick="skipEne()">SKIP</button>
+    <div id="exit" >
+        <h1 id="quit_title">¿Desea salir?(Contará como partida perdida)</h1>
+        <button onclick="toggleExit()" id="cancelExit">Cancelar</button>
+        <button onclick="cancelarBatalla()" id="confirmExit">Confirmar</button>
+    </div>
+    <div id="stad">
+        <div id="per">
+            <div id="per_v">
+                 <div id="per_cant"></div>
+                 <div id="per_vi">vida</div>
+            </div>
+        </div>
+        <div id="ene">
+            <div id="ene_v">
+                <div id="ene_cant"></div>
+                <div id="ene_vi">vida</div>
+            </div>
+        </div>
+        <h3>VS</h3>
+    </div>
+    <div class="img" id="personaje"></div>
+    <div class="img" id="enem"></div>
+    <div id="att">
+        <div>
+            <button onclick="Atq()" id="AtqAtt">Ataque</button>
+        </div>
+        <div>
+            <button onclick="Def()" id="DefAtt">Escudo</button>
+            <p id="DefP">xd</p>
+        </div>
+        <div>
+            <button onclick="Sup()" id="SupAtt">Super</button>
+            <p id="SupP">123</p>
+        </div>
+    </div>
+    <div id="opacar">
+        <div id="end_cont">
+            <h1 id="WLtitle">Has ganado! tus tesoros:</h1>
+            <button onclick="cancelarBatalla()" class="ok " id="salirBtn">Salir</button>
+            <p id="reward_p">+ Coins</p>
+            <p id="gems_msg"></p>
+            <p id="itemsDropP">Items dropeados:</p>
+            <div id="itemsDropeados"></div>
+            <button onclick="PlayAgain()" class="ok" id="volverBtn">Volver a jugar</button>
+            <br>
+            <button onclick="skipLvl()" class="ok extraBtn" id="skipLvl" hidden>Siguiente</button>
+            <button onclick="revenge()" class="ok extraBtn" id="revengeL" hidden>Revancha</button>
+        </div>
+    </div>
+    <div id="damage">
+        <h1 id="dmg_per"></h1>
+        <h1 id="esq_per"></h1>
+        <h1 id="dmg_ene"></h1>
+        <h1 id="esq_ene"></h1>
+    </div>
+    <div class="contenedor">
+        <div id="equip_pers">
+            <div class="equipamiento" id="pers_casco"></div>
+            <div class="equipamiento" id="pers_pechera"></div>
+            <div class="equipamiento" id="pers_pantalon"></div>
+            <div class="equipamiento" id="pers_botas"></div>
+            <div class="equipamiento" id="pers_espada"></div>
+        </div>
+        <div id="equip_enem">
+            <div id="enem_casco" class="equipamiento"></div>
+            <div id="enem_pechera" class="equipamiento"></div>
+            <div id="enem_pantalon" class="equipamiento"></div>
+            <div id="enem_botas" class="equipamiento"></div>
+            <div id="enem_espada" class="equipamiento"></div>
+        </div>
+    </div>
+    <script src="match_js/match.js"></script>   <!--  27 -->
+    <script src="match_js/load.js"></script>    <!-- 146 -->
+    <script src="match_js/stats_m.js"></script> <!-- 16 -->
+    <script src="match_js/atacks.js"></script>  <!-- 284 -->
+    <script src="match_js/atqesp.js"></script>
+    <script src="menu&match_js/object.js"></script>
+    <script src="menu&match_js/secciones.js"></script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>mobSlayer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/icon.png" type="image/png">
+</head>
+<body>
+    <audio loop id="lobby_theme">
+        <source src="SFX/shiawase-monstercat-release.mp3">
+    </audio>
+    <div id="arriba">
+            <div id="coins">
+                <div id="coinsimg"></div>
+                <p>Coins:</p>
+            </div>
+            <div id="gems">
+                <div id="gemsimg"></div>
+                <p>Gems:</p>
+            </div>
+        <button onclick="toggle_c('tienda')" id="tienda">Tienda</button>
+    </div>
+    <div class="cont_menu">
+        <h1>mobSlayer</h1>
+        <p>v1.4</p>
+        <br>
+        <button onclick="toggle_c('batalla')" class="b1">Batalla</button>
+        <br>
+        <button onclick="toggle_c('estadisticas')" class="b1">Estadísticas</button>
+        <br>
+        <button onclick="toggle_c('opciones')" class="b1">Opciones</button>
+    </div>
+    <div id="cont_batalla"><!-- Batalla -->
+        <button onclick="toggle_c('batalla')" class="volver b1">Volver</button><!-- btn_batalla -->
+        <button onclick="toggle_c('niveles')"  id="btn_niveles" class="b1">Niveles</button>
+        <button onclick="toggle_c('bestiario')"  id="btn_bestiario" class="b1">Bestiario</button>
+        <button onclick="toggle_c('equipamiento')" id="btn_equipamiento" class="b1">Equipamiento</button><!-- btn_eq -->
+        <select name="raidType" id="raidType" class="b1" onchange="changeRaid(this.value)">
+            <option value="facil" selected disabled>Tipo raid</option>
+            <option value="pillager">Pillagers</option>
+            <option value="marino">Marinos</option>
+            <option value="trialchamber">Trial chambers</option>
+        </select>
+        <select name="difficulty" id="diff" class="b1" onchange="changeDiff(this.value)">
+            <option value="facil" selected disabled>Dificultad</option>
+            <option value="facil">Fácil</option>
+            <option value="normal">Normal</option>
+            <option value="dificil">Difícil</option>
+            <option value="extremo">Extremo</option>
+        </select>
+        <button id="btn_pelear" class="b1" onclick="playGame()">Pelear</button>
+        <h1 id="tut_h1"></h1>
+    </div>
+    <div id="cont_confRaid">
+        <p id="confRaidP"></p>
+        <button id="confRaidNo" class="b1" onclick="desopacar('confRaid')">No</button>
+        <button id="confRaidYes" class="b1" onclick="playRaid()">Si</button>
+    </div>
+    <div id="cont_bestiario">
+        <button onclick="toggle_c('bestiario')" class="volver b1">Volver</button>
+        <div id="bestMobsCont"></div>
+        <div id="bestMobsInfo">
+            <div id="mobsInfoImg"></div>
+            <h1 id="mobsInfoTitle"></h1>
+            <div id="mobsInfoTxt">
+                <p></p>
+            </div>
+            <div id="mobsInfoDropsCont"></div>
+        </div>
+    </div>
+    <div id="cont_niveles">
+        <button onclick="toggle_c('niveles')" class="volver b1">Volver</button>
+        <div id="c_secciones">
+            <div class="overflow"><div id="seccion1_div" class="secciones">Sección 1
+                <!-- <div id="nivel1" class="nivel">
+                    <h1 class="mobTitle">Nivel 1</h1>
+                    <div class="mob"></div>
+                    <div class="mobItemsC">
+                        <div class="mobItems mobEspada"></div>
+                        <div class="mobItems mobCasco"></div>
+                        <div class="mobItems mobPechera"></div>
+                        <div class="mobItems mobPantalon"></div>
+                        <div class="mobItems mobBotas"></div>
+                    </div>
+                    <button class="play" id="play_nivel1" onclick="playLevel(seccion1.nivel1)">Play</button>
+                </div> -->
+                
+            </div></div>
+            <div class="overflow"><div id="seccion2_div" class="secciones">Sección 2</div></div>
+            <div class="overflow"><div id="seccion3_div" class="secciones">Sección 3</div></div>
+            <div class="overflow"><div id="seccion4_div" class="secciones">Sección 4</div></div>
+            <div class="overflow"><div id="seccion5_div" class="secciones">Sección Final</div></div>
+        </div>
+        
+    </div>
+    <div id="cont_opciones">
+        <button onclick="toggle_c('opciones')" class="volver b1">Volver</button>
+        <div id="musica">
+            <p>Musica?</p>
+            <button onclick="despausar()">Si</button>
+            <button onclick="pausar()">No</button>
+        </div>
+        <p id="cred">Juego hecho por LH3208 y ChatGPT</p>
+        <p id="ver">Versión: 1.4 "Ataques especiales"</p>
+        <div id="codes">
+            <form onsubmit="checkCode(event)">
+                <h2>Canjear códigos:</h2>
+                <input type="text" id="codeInput" name="code" required placeholder="Código">
+                <button type="submit" id="codeButton">Canjear</button>
+                <p id="canjeo">xd</p>
+            </form>
+        </div>
+        <button onclick="toggle_c('updates')" class="b1" id="updates_btn">Actualizacion</button>
+        <button onclick="toggle_c('teclados')" class=" b1" id="teclados">Teclados</button>
+    </div>
+    <div id="cont_updates">
+        <button onclick="toggle_c('updates')" class="volver b1">Volver</button>
+        <div id="act_cont">
+                <h1 id="act_title"></h1>
+                <p id="act_txt"></p>
+        </div>
+    </div>
+    <div id="cont_teclados">
+        <button onclick="toggle_c('teclados')" class="volver b1">Volver</button>
+        <div id="teclado_tabla_cont">
+           <table border="1" id="tabla_teclados">
+                <tr>
+                    <th>Función</th>
+                    <th>Tecla </th>
+                    <th>Reiniciar</th>
+                </tr>
+                <tr>
+                    <td>Ataque</td>
+                    <td><button class="teclados_btn" onclick="changeKey('Atq')" id="btn_ck_Atq">1</button></td>
+                    <td><button class="teclados_btn" onclick="resetKey('Atq')">reiniciar</button></td>
+                </tr>
+                <tr>
+                    <td>Defensa</td>
+                    <td><button class="teclados_btn" onclick="changeKey('Def')" id="btn_ck_Def">2</button></td>
+                    <td><button class="teclados_btn" onclick="resetKey('Def')">reiniciar</button></td>
+                </tr>
+                    <tr>
+                    <td>Super</td>
+                    <td><button class="teclados_btn" onclick="changeKey('Sup')" id="btn_ck_Sup">3</button></td>
+                    <td><button class="teclados_btn" onclick="resetKey('Sup')">reiniciar</button></td>
+                </tr>
+                <tr>
+                    <td>Especial 1</td>
+                    <td><button class="teclados_btn" onclick="changeKey('Esp1')" id="btn_ck_Esp1">4</button></td>
+                    <td><button class="teclados_btn" onclick="resetKey('Esp1')">reiniciar</button></td>
+                </tr>
+                <tr>
+                    <td>Especial 2</td>
+                    <td><button class="teclados_btn" onclick="changeKey('Esp2')" id="btn_ck_Esp2">5</button></td>
+                    <td><button class="teclados_btn" onclick="resetKey('Esp2')">reiniciar</button></td>
+                </tr>
+                <tr>
+                    <td>skip</td>
+                    <td><button class="teclados_btn" onclick="changeKey('Skip')" id="btn_ck_Skip">s</button></td>
+                    <td><button class="teclados_btn" onclick="resetKey('Skip')">reiniciar</button></td>
+                </tr>
+                <tr>
+                    <td>play again</td>
+                    <td>Enter || space</td>
+                    <td></td>
+                </tr>   
+                <tr>
+                    <td>Usar mismo boton</td>
+                    <td>Enter || space</td>
+                    <td></td>
+                </tr>
+            </table> 
+        </div>
+        <p id="errormsg_savekeys"></p>
+        <button onclick="resetAllKeys()" class="b1" id="reiniciar_teclas">Reiniciar todas las teclas</button>
+        <button onclick="saveKeys()" class="b1" id="save_teclas">Guardar</button>
+    </div>
+    <div id="cont_estadisticas">
+        <button onclick="toggle_c('estadisticas')" class="volver b1">Volver</button>
+        <div id="stat">
+            <h1>Estadisticas</h1>
+            <ul>
+                <li id="PG">xd</li>
+                <li id="PP">xd</li>
+                <li id="PT">xd</li>
+                <li id="DI">xd</li>
+                <li id="DR">xd</li>
+            </ul>
+        </div>
+    </div>
+    <div id="cont_tienda">
+        <button onclick="toggle_c('tienda')" class="volver b1">Volver</button>
+        <div id="comprar">
+            <div id="items_a_comprar"></div>
+            <div id="comprarExtra"></div>
+            <div id="comprarCoins"></div>
+        </div>
+    </div>
+    <div id="cont_opacar" onclick="desopacar()"></div>
+    <div id="cont_infoesp">
+        <div id="infoespimg"></div>
+        <h1 id="infoesptitle"></h1>
+        <p id="infoesptxt"></p>
+        <p id="errormsg_infoesp"></p>
+        <p id="swordprice">💎300</p>
+        <button id="buyespbtn" class="buy_btn">Comprar</button>
+    </div>
+    <div id="cont_equipamiento"><!-- Equipamiento -->
+        <button onclick="toggle_c('equipamiento')" class="volver b1">Volver</button>
+        <div id="stats">
+            <h3>Estadistica del personaje:</h3>
+            <p id="vida_p">Vida:xd</p>
+            <p id="daño_p">Daño:xd</p>
+        </div>
+        <div class="pers">
+            <div id="imagen"></div>
+            <button id="casco" class="armadura" value="casco" onclick="select(value)"></button>
+            <button id="pechera" class="armadura" value="pechera" onclick="select(value)"></button>
+            <button id="pantalon" class="armadura" value="pantalon" onclick="select(value)"></button>
+            <button id="botas" class="armadura" value="botas" onclick="select(value)"></button>
+            <button id="espada" class="armadura" value="espada" onclick="select(value)"></button>
+            <button id="bag" class="armadura" onclick="select('bag')"></button>
+        </div>
+        <button id="probarbtn" class="b1" onclick="practica()">Probar</button>
+    </div>
+    <div id="opacar"></div>
+    <div id="showArmInfoCont">
+        <div id="showArmInfoImg"></div>
+        <h1 id="showArmInfoTitle">Item</h1>
+        <p id="showArmInfoCalidad">Ultimate</p>
+        <div id="showArmInfoTxt"><p >descripcion</p></div>
+        
+        <button id="useItem_btn">Usar</button>
+        <button id="testItem_btn">Probar</button>
+    </div>
+    <div class="seleccionar" id="cont_casco">
+        <button class="opc" id="casco_nada" onclick="showArmInfo('casco_nada')"></button>
+        <button class="opc" id="casco_cuero" onclick="showArmInfo('casco_cuero')"></button>
+        <button class="opc" id="casco_malla" onclick="showArmInfo('casco_malla')"></button>
+        <button class="opc" id="casco_oro" onclick="showArmInfo('casco_oro')"></button>
+        <button class="opc" id="casco_hierro" onclick="showArmInfo('casco_hierro')"></button>
+        <button class="opc" id="casco_diamante" onclick="showArmInfo('casco_diamante')"></button>
+        <button class="opc" id="casco_netherite" onclick="showArmInfo('casco_netherite')"></button>
+    </div>
+    <div class="seleccionar" id="cont_pechera">
+        <button class="opc" id="pechera_nada" onclick="showArmInfo('pechera_nada')"></button>
+        <button class="opc" id="pechera_cuero" onclick="showArmInfo('pechera_cuero')"></button>
+        <button class="opc" id="pechera_malla" onclick="showArmInfo('pechera_malla')"></button>
+        <button class="opc" id="pechera_oro" onclick="showArmInfo('pechera_oro')"></button>
+        <button class="opc" id="pechera_hierro" onclick="showArmInfo('pechera_hierro')"></button>
+        <button class="opc" id="pechera_diamante" onclick="showArmInfo('pechera_diamante')"></button>
+        <button class="opc" id="pechera_netherite" onclick="showArmInfo('pechera_netherite')"></button>
+    </div>
+    <div class="seleccionar" id="cont_pantalon">
+        <button class="opc" id="pantalon_nada" onclick="showArmInfo('pantalon_nada')"></button>
+        <button class="opc" id="pantalon_cuero" onclick="showArmInfo('pantalon_cuero')"></button>
+        <button class="opc" id="pantalon_malla" onclick="showArmInfo('pantalon_malla')"></button>
+        <button class="opc" id="pantalon_oro" onclick="showArmInfo('pantalon_oro')"></button>
+        <button class="opc" id="pantalon_hierro" onclick="showArmInfo('pantalon_hierro')"></button>
+        <button class="opc" id="pantalon_diamante" onclick="showArmInfo('pantalon_diamante')"></button>
+        <button class="opc" id="pantalon_netherite" onclick="showArmInfo('pantalon_netherite')"></button>
+    </div>
+    <div class="seleccionar" id="cont_botas">
+        <button class="opc" id="botas_nada" onclick="showArmInfo('botas_nada')"></button>
+        <button class="opc" id="botas_cuero" onclick="showArmInfo('botas_cuero')"></button>
+        <button class="opc" id="botas_malla" onclick="showArmInfo('botas_malla')"></button>
+        <button class="opc" id="botas_oro" onclick="showArmInfo('botas_oro')"></button>
+        <button class="opc" id="botas_hierro" onclick="showArmInfo('botas_hierro')"></button>
+        <button class="opc" id="botas_diamante" onclick="showArmInfo('botas_diamante')"></button>
+        <button class="opc" id="botas_netherite" onclick="showArmInfo('botas_netherite')"></button>
+    </div>
+    <div class="seleccionar" id="cont_espada">
+        <button class="opc" id="espada_nada" onclick="showArmInfo('espada_nada')"></button>
+        <button class="opc" id="espada_madera" onclick="showArmInfo('espada_madera')"></button>
+        <button class="opc" id="espada_piedra" onclick="showArmInfo('espada_piedra')"></button>
+        <button class="opc" id="espada_oro" onclick="showArmInfo('espada_oro')"></button>
+        <button class="opc" id="espada_hierro" onclick="showArmInfo('espada_hierro')"></button>
+        <button class="opc" id="espada_diamante" onclick="showArmInfo('espada_diamante')"></button>
+        <button class="opc" id="espada_netherite" onclick="showArmInfo('espada_netherite')"></button>
+        <button class="opc" id="espada_arco" onclick="showArmInfo('espada_arco')"></button>
+        <button class="opc" id="espada_ballesta" onclick="showArmInfo('espada_ballesta')"></button>
+        <button class="opc" id="espada_tridente" onclick="showArmInfo('espada_tridente')"></button>
+        <button class="opc" id="espada_mace" onclick="showArmInfo('espada_mace')"></button>
+        <button class="opc" id="espada_superespada" onclick="showArmInfo('espada_superespada')"></button>
+        <button class="opc" id="espada_amatista-staff" onclick="showArmInfo('espada_amatista-staff')"></button>
+        <button class="opc" id="espada_fuego" onclick="showArmInfo('espada_fuego')"></button>
+    </div>
+    <div class="seleccionar" id="cont_bag">
+        <button class="opc" id="items_coins" onclick="showArmInfo('items_coins')"></button>
+        <button class="opc" id="items_gems" onclick="showArmInfo('items_gems')"></button>
+        <button class="opc" id="items_ch" onclick="showArmInfo('items_ch')"></button>
+        <button class="opc" id="items_dch" onclick="showArmInfo('items_dch')"></button>
+        <button class="opc" id="items_gch" onclick="showArmInfo('items_gch')"></button>
+        <button class="opc" id="items_ech" onclick="showArmInfo('items_ech')"></button>
+        <button class="opc" id="items_v" onclick="showArmInfo('items_v')"></button>
+        <button class="opc" id="items_ov" onclick="showArmInfo('items_ov')"></button>
+        <button class="opc" id="items_s" onclick="showArmInfo('items_s')"></button>
+        <button class="opc" id="items_pillagerMap" onclick="showArmInfo('items_pillagerMap')"></button>
+        <button class="opc" id="items_marinoMap" onclick="showArmInfo('items_marinoMap')"></button>
+        <button class="opc" id="items_trialchamberMap" onclick="showArmInfo('items_trialchamberMap')"></button>
+    </div>
+    <div id="opacar107"></div>
+    <div id="showUnlock">
+        <h1 id="text_showUnlock">Has desbloqueado:</h1>
+        <div id="items_unlock"></div>
+        <button id="t_showUnlock" onclick="toggle_showUnlock()">X</button>
+    </div>
+
+    <script src="menu_js/main.js"></script>             <!--   3 -->
+    <script src="menu_js/first.js"></script>
+    <script src="menu&match_js/secciones.js"></script>
+    <script src="menu&match_js/object.js"></script>
+    <script src="menu_js/codes.js"></script>
+    <script src="menu_js/cargar.js"></script>           <!--  73 -->
+    <script src="menu_js/contenedores.js"></script>     <!--  17 -->
+    <script src="menu_js/stats.js"></script>            <!--  61 -->
+    <script src="menu_js/audios.js"></script>           <!--  42 -->
+    <script src="menu_js/equipaje.js"></script>         <!-- 135 -->
+    <script src="menu_js/chest.js"></script>            <!-- 233 -->
+    <script src="menu_js/difficulty.js"></script>
+    <script src="menu_js/teclados.js"></script>
+</body>
+</html>
