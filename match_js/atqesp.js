@@ -53,14 +53,14 @@ function esp_shoot(){
 }
 //let explosionpoint = 5;
 function esp_explosion(){
-    if(persPoints['explosionpoint']>=10&&freezed===false){
+    if(persPoints['explosionpoint']>=7&&freezed===false){
         freezed=true;
         defendiendo_per=true;
         escudop+=1000;
         mostrarSuper('per', 'Bloqueando', 'green');
         freeze();
         fun_Ataque(5);
-        persPoints['explosionpoint']-=10;
+        persPoints['explosionpoint']-=7;
         document.getElementById('explosionP').textContent = `${persPoints['explosionpoint']}/5`;
         setTimeout(() => {
             AtqEne();
