@@ -90,6 +90,7 @@ function playLevel(seccionName, levelName){
     localStorage.setItem('enemy', JSON.stringify(level.mob));
     localStorage.setItem('reward', JSON.stringify(100));
     localStorage.setItem('mobOnLevels', 'true');
+    localStorage.setItem('raiding', 'false');
     localStorage.setItem('playingLevel', `${seccionName}_${levelName}`);
     window.location.href = 'Match.html';
 }
