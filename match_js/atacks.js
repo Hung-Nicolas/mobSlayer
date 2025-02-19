@@ -643,7 +643,7 @@ function newStage() {
     let nStage = `nivel${num + 1}`;
     
     localStorage.setItem('currentStage', nStage);
-    location.reload(true);
+    window.location.href = 'Match.html';
 }
 function savePoints() {
     if (!persPoints) {
