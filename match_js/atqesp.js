@@ -61,7 +61,7 @@ function esp_explosion(){
         freeze();
         fun_Ataque(5);
         persPoints['explosionpoint']-=7;
-        document.getElementById('explosionP').textContent = `${persPoints['explosionpoint']}/5`;
+        document.getElementById('explosionP').textContent = `${persPoints['explosionpoint']}/7`;
         setTimeout(() => {
             AtqEne();
             unfreeze();
