@@ -4,6 +4,7 @@ Juego de combate por turnos inspirado en Minecraft, jugable desde el navegador. 
 
 **Versión actual: 1.4 — "Ataques especiales"**
 
+[Link MobSlayer](https://hung-nicolas.github.io/mobSlayer/)
 ---
 
 ## 🎮 Cómo jugar
